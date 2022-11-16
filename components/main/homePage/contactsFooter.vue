@@ -1,7 +1,7 @@
 <template>
   <section id="section-contact-footer" class="section-main">
     <div id="contact-form">
-      <hamburger-menu light-color-btn="dark" name-menu="homeNavMenu" />
+<!--      <hamburger-menu light-color-btn="dark" name-menu="homeNavMenu" /> -->
       <h1>НАПИШИТЕ НАМ</h1>
       <form
         v-model="contactForm"

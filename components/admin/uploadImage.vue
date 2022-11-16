@@ -1,18 +1,17 @@
 <template>
   <div class="container-image-upload">
     <h3>Header Image</h3>
-    <div v-if="!image">
-<!--      <input type="file" @change="onFileChange" class="btn button-upload-image"/>-->
+<!--    <div v-if="!image"> -->
+    <div v-if="!imageUrl">
       <div class="input__wrapper">
         <input type="file" id="input-file" class="input input-file" multiple @change="onFileChange" >
         <label for="input-file" class="btn file-button">
-<!--          <span class="input__file-icon-wrapper"><img class="input__file-icon" src="./img/add.svg" alt="Выбрать файл" width="25"></span>-->
           <span class="input__file-button-text">Выберите файл</span>
         </label>
       </div>
     </div>
     <div v-else class="image-block">
-      <img :src="url" :class="customClassImage" />
+      <img :src="imageUrl" :class="customClassImage" />
       <button @click="removeImage" class="btn button-upload-image">Remove image</button>
     </div>
   </div>
@@ -24,37 +23,30 @@ export default {
   data(){
     return {
       image: null,
-      url: null,
+ //     url: null,
     }
   },
   mounted() {
-    this.url = this.imageUrl
+//    this.url = this.imageUrl
   },
   methods: {
     onFileChange(e) {
-
-        this.image = e.target.files[0]; // accessing file
-        console.log('selectedFile = ', this.image)
+      this.image = e.target.files[0]; // accessing file
+      console.log('selectedFile = ', this.image)
 
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length)
         return;
-
-
       this.createImage(files[0]);
-
-
-      console.log ('image-->', this.image)
       $nuxt.$emit('uploadImage' + this.adminPage, { nameImage: this.nameImage, image: this.image });
     },
     createImage(file) {
-      console.log ('image all-->', file)
-  //    let image = new Image();
       let reader = new FileReader();
       const vm = this;
 
       reader.onload = (e) => {
-        vm.url = e.target.result;
+        vm.imageUrl = e.target.result;
+//        vm.url = e.target.result;
       };
       reader.readAsDataURL(file);
     },

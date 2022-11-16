@@ -72,8 +72,8 @@ export const actions = {
   async savePage({commit}, formData) {
     try {
       const namePage = formData.get('namePage')
-      console.log('namePage ->', namePage)
-      //    await this.$axios.$post('/api/users/admin/create', formData)
+      console.log('savePage namePage ->', namePage)
+//      await this.$axios.$post('/api/users/admin/create', formData)
     } catch (e) {}
   },
 }

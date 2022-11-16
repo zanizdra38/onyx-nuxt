@@ -75,6 +75,8 @@ h2{
 h3{
   font-size: 1.4rem;
 }
+
+
 .row{
   display: flex;
 }
@@ -120,6 +122,17 @@ h3{
 .dark-page-text{
   color: #E4DDDD;
 }
+/* Message box */
+.container-message-box{
+  position: relative;
+  width: 100%;
+}
+.message-banner{
+  position: absolute;
+  width: 100%;
+  top: -30px;
+}
+
 /* Bootstrap  styles */
 .container{
   max-width: 1140px;

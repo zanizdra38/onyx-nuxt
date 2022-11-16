@@ -33,6 +33,7 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     "vue2-editor/nuxt",
+    'bootstrap-vue/nuxt',
     ['nuxt-modernizr',{
       'feature-detects': ['css/scrollbars', 'css/overflow-scrolling'],
         options: ['setClasses'],
@@ -41,7 +42,8 @@ module.exports = {
         useCookie: true,
         cookieKey: 'i18n_redirected',
         alwaysRedirect: false,
-        fallbackLocale: 'en'
+        fallbackLocale: 'en',
+        redirectOn: 'root',
       },
       locales: [
         {

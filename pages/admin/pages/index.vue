@@ -2,7 +2,7 @@
   <main>
     <h1>Pages</h1>
     <div>
-      <tab-elements :arr-elements="arrElements" :show-delete-button="showDeleteButton" />
+      <tab-elements :arr-elements="arrElements" :show-delete-button="showDeleteButton" :show-col="showCol" />
     </div>
   </main>
 </template>
@@ -20,6 +20,8 @@ export default {
   },
   data: ()=>({
     showDeleteButton: false,
+    showCol: ['name', 'title', 'dateChange', 'order', ],
+
   }),
   mounted() {
     let ap = this

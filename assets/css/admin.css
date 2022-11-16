@@ -49,3 +49,8 @@
   color: #F5E144;
   border-color: #F5E144;
 }
+
+/* Form elements */
+.item-form{
+  max-width: 800px;
+}

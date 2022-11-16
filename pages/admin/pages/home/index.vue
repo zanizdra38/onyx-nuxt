@@ -31,12 +31,12 @@
 <script>
 import QS from 'qs'
 import uploadImage from '~/components/admin/uploadImage'
-import TextWriter from "../../../../components/admin/textWriter";
+//import TextWriter from "../../../../components/admin/textWriter";
 export default {
   name: "indexAdminPagesHome",
   layout: "admin",
   middleware: ['admin-auth'],
-  components: {TextWriter, uploadImage, },
+  components: {/*TextWriter,*/ uploadImage, },
 //  prop: [ saveActions, ],
   async asyncData({store}) {
     const oldContent = store.getters["adminPages/pagesSite"]

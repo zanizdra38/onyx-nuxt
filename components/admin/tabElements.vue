@@ -1,62 +1,90 @@
 <template>
-  <table id="tab-elements" class="table table-hover" border="1">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Slug</th>
-      <th scope="col">Title</th>
-      <th scope="col">Date Change</th>
-      <th scope="col">Edit</th>
-      <th scope="col" v-if="showDeleteButton">Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="(itemElements, keyElements, indexElements) in arrElements" :key="keyElements">
-      <th scope="row">{{ keyElements + 1 }}</th>
-      <td>{{ itemElements.name }}</td>
-      <td>{{ itemElements.title }}</td>
-      <td>{{ new Date(itemElements.date).toLocaleString() }}</td>
-      <td class="td-button">
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="editElement(itemElements.name)"
-        >
-          <!--          @click="editPage(page._id)"-->
-          Edit
-        </button>
-      </td>
-      <td class="td-button" v-if="showDeleteButton">
-        <button
-          type="submit"
-          class="btn btn-danger"
-          @click="deletePage(page._id)"
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="container-message-box">
+    <message-banner class="message-banner" :variant="messages.variant"  :showBanner="messages.showMessage" :message="messages.message" />
+    <confirm-box :message="messages.message" :showConfirm="messages.showMessage"/>
+    <table id="tab-elements" class="table table-hover" border="1">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" v-for="(itemShowCol, keyShowCol) in showCol" :key="keyShowCol">{{ itemShowCol }}</th>
+        <th scope="col">Edit</th>
+        <th scope="col" v-if="showDeleteButton">Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="(itemElements, keyElements) in arrElements" :key="keyElements">
+        <th scope="row">{{ keyElements + 1 }}</th>
+        <td v-for="(itemShowCol, keyShowCol) in showCol" :key="keyShowCol">{{ itemElements[itemShowCol] }}</td>
+        <td class="td-button">
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="editElement(itemElements.name)"
+          >
+            Edit
+          </button>
+        </td>
+        <td class="td-button" v-if="showDeleteButton">
+          <button
+            type="submit"
+            class="btn btn-danger"
+            @click="deleteElement(itemElements.id)"
+          >
+            Delete {{ itemElements.id }}
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
+
+import MessageBanner from "./messageBox";
+import ConfirmBox from "./confirmBox";
+
 export default {
   name: "tabElements",
-  props:[ "showDeleteButton", "arrElements"],
+  components: {ConfirmBox, MessageBanner},
+  props:[ "showDeleteButton", "arrElements", "showCol"],
+  data: ()=>({
+    messages:{
+      showMessage: false,
+//      messageFailSendEmail: false,
+//      variant: 'danger',
+      message: 'Do you really want to remove this item?',
+    },
+    idDeleteComponent: null,
+  }),
   mounted() {
-    console.log('showDeleteButton-->', this.showDeleteButton)
+    const ap = this
+    $nuxt.$on('deleteElementConfirm', slug => ap.deleteElementAction());
+    $nuxt.$on('closeElementConfirm', () => ap.closeElementConfirm());
   },
   methods: {
     editElement(slug){
-      $nuxt.$emit('editElementsPage', slug);
+      $nuxt.$emit('editElement', slug);
     },
-//    deletePage(page._id)
+    deleteElement(id){
+      this.idDeleteComponent = id
+      this.messages.showMessage = true
+    },
+    deleteElementAction(){
+      this.messages.showMessage = false
+      if(this.idDeleteComponent){
+        $nuxt.$emit('deleteElement', this.idDeleteComponent);
+      }
+    },
+    closeElementConfirm(){
+     this.messages.showMessage = false
+    }
   },
 }
 </script>
 
 <style scoped>
+
 /*
 #tab-elements{
   width: 100%;

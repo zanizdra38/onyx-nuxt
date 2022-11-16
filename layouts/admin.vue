@@ -1,7 +1,7 @@
 <template>
-  <div id="admin-page" class="row layout-admin-wrap">
+  <div id="admin-page" class="row-dz layout-admin-wrap">
     <div id="admin-sidebar">
-      <nav id="admin-navbar" class="navbar">
+      <nav id="admin-navbar">
         <div id="container-admin-logo">
           <img id="img-admin-logo" src="~/assets/onyx_lite.png" alt="onyx logo" />
         </div>
@@ -23,8 +23,17 @@
           <li class="nav-item" v-on:click="showSubPages=!showSubPages">
             <nuxt-link class="nav-link parent-link" to="/admin/pages">Pages of Site</nuxt-link>
           </li>
+          <li class="nav-item" v-on:click="showSubPages=!showSubPages">
+            <nuxt-link class="nav-link parent-link" to="/admin/categories">Categories</nuxt-link>
+          </li>
+          <li class="nav-item" v-on:click="showSubPages=!showSubPages">
+            <nuxt-link class="nav-link parent-link" to="/admin/products">Products</nuxt-link>
+          </li>
           <li class="nav-item">
             <nuxt-link class="nav-link parent-link" to="/admin/news">News</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link class="nav-link parent-link" to="/admin/projects">Projects</nuxt-link>
           </li>
           <li class="nav-item">
             <nuxt-link class="nav-link parent-link" to="/admin/settings">Settings</nuxt-link>
@@ -66,6 +75,9 @@ export default {
 <style scoped>
 #admin-page{
   font-family: Roboto-Regular;
+}
+.row-dz {
+  display: flex;
 }
 .layout-admin-wrap {
   width: 100%;
